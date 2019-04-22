@@ -1,0 +1,17 @@
+---
+name: all bootstrap
+actions:
+  -
+    action: replace_config
+    attributes:
+      url: files/configs/all
+    name: "Replace entire startup-config"
+
+  -
+    action: install_image
+    always_execute: true
+    attributes:
+      url: files/images/EOS-4.21.5F.swi
+      version: 4.21.5F
+    name: "Install 4.21.5F"
+

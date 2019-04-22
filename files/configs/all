@@ -1,0 +1,13 @@
+username admin privilege 15 role network-admin secret admin
+!
+aaa authorization exec default local
+!
+ip routing
+!
+interface Management1
+ ip address dhcp
+!
+management api http-commands
+ no shutdown
+!
+

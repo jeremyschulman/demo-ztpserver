@@ -1,0 +1,11 @@
+---
+patterns:
+  - name: Default None Pattern
+    definition: all
+    interfaces:
+      - none: none:none
+
+  - name: Default Any Pattern
+    definition: all
+    interfaces:
+      - any: any:any

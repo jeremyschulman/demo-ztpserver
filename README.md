@@ -4,6 +4,8 @@ This repository contains the "minimum viable setup" for using the [Arista ZTP Se
 a collection of EOS devices using the same EOS software image and configuration file.  This
 use-case is not intended for "production" scenarios but rather to simply install EOS images quickly.
 
+Total time to setup ZTP Server using this repo: 5 minutes.
+
 # Demo Use Case
 
     As a network engineer, I need to intall the same version of EOS on all devices in my lab.  
@@ -58,6 +60,15 @@ For the purpose of this demonstration:
     I want all devices to use EOS version 4.21.5F
     
 
+### Changing IP addresses
+
+If you want to change the IP addresses used in this demo, you will need to make the following changes:
+
+   * `dnsmasq.conf` 
+   * `ztpserver.conf`
+   
+### Setup of ZTP Server Files
+
 This repo contains a number of files that need to be copied into the ZTP server
 installation.  Presuming you have setup `ZTPS_DEFAULT_DATAROOT`, you can run
 these commands:
@@ -73,4 +84,41 @@ The `neighbordb` is configured to match any EOS device.  There are two patterns 
    * Match any EOS device that does not have any interfaces connected (_isolated_)
    * Match any EOS device that has any interfaces connected
    
-If you want to change these pattern matching constraints, refer to the ZTP server documentation [here](https://ztpserver.readthedocs.io/en/master/config.html#dynamic-provisioning-neighbordb).   
+If you want to change these pattern matching constraints, refer to the ZTP server documentation [here](https://ztpserver.readthedocs.io/en/master/config.html#dynamic-provisioning-neighbordb).
+
+### EOS Image Files
+
+You will need to provide your own EOS image (*.swi) files.  These files need to be copied into the
+`files/images` directory.  There is a text-placeholder file for illustration purposes only.
+
+### EOS Configuration File
+
+The EOS configuration file used in this demo is located in [files/configs/all](files/configs/all).  The contents
+of this file will be load-replaced onto the EOS device.  
+
+# Running
+
+You will need to have two terminal windows open.  Once must have the virtualenv active 
+so that you can run the `ztps` command.  The other does not require virtualenv.
+
+In the virtualenv terminal, execute the script to start the ZTP Server:
+
+````bash
+./run-ztps.sh
+````
+
+In the 2nd terminal, start the DHCP server:
+
+```bash
+./run-dnsmasq.sh
+```
+
+Presuming that you have your laptop connected to the EOS devices in some manner, you should start 
+seeing log messages in both windows.
+
+Good luck!
+
+# Question / Comments
+
+Please open issues in this repo and I will try to answer them in a timely manner.
+   
